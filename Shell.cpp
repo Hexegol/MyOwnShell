@@ -54,6 +54,34 @@ std::unique_ptr<Command> Shell::parseCommand(const std::string& input)
 	{
 		return std::make_unique<ExitCommand>();
 	}
+	else if (command == "ls")
+	{
+		return std::make_unique<LsCommand>();
+	}
+	else if (command == "pwd")
+	{
+		return std::make_unique<PwdCommand>();
+	}
+	else if (command == "mkdir")
+	{
+		std::string directoryName;
+		iss >> directoryName;
+		return std::make_unique<MkdirCommand>(directoryName);
+	}
+	else if (command == "rmdir")
+	{
+		std::string directoryName;
+		
+		iss >> directoryName;
+		
+		return std::make_unique<RmdirCommand>(directoryName);
+	}
+	else if (command == "touch")
+	{
+		std::string fileName;
+		iss >> fileName;
+		return std::make_unique<TouchCommand>(fileName);
+	}
 	else
 	{
 		std::cerr << "command not recognized : " << command << std::endl;

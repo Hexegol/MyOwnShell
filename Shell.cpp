@@ -82,6 +82,18 @@ std::unique_ptr<Command> Shell::parseCommand(const std::string& input)
 		iss >> fileName;
 		return std::make_unique<TouchCommand>(fileName);
 	}
+	else if (command == "rm")
+	{
+		std::string fileName;
+		iss >> fileName;
+		return std::make_unique<RmCommand>(fileName);
+	}
+	else if (command == "cat")
+	{
+		std::string fileName;
+		iss >> fileName;
+		return std::make_unique<CatCommand>(fileName);
+	}
 	else
 	{
 		std::cerr << "command not recognized : " << command << std::endl;

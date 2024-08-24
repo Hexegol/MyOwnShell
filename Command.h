@@ -63,3 +63,21 @@ public:
     explicit TouchCommand(const std::string& fileName);
     void execute(Shell& shell) override;
 };
+
+class RmCommand : public Command
+{
+private:
+    std::string fileName;
+public:
+    explicit RmCommand(const std::string& fileName);
+    void execute(Shell& shell) override;
+};
+
+class CatCommand : public Command
+{
+private:
+    std::string fileName;
+public:
+    explicit CatCommand(const std::string& fileName);
+    void execute(Shell& shell) override;
+};

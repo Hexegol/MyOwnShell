@@ -115,3 +115,44 @@ void TouchCommand::execute(Shell& shell)
     }
    
 }
+
+RmCommand::RmCommand(const std::string& fileName) : fileName(fileName)
+{
+
+}
+
+void RmCommand::execute(Shell& shell)
+{
+    try {
+        if (std::filesystem::remove(fileName)) {
+            std::cout << "file '" << fileName << "' has been removed successfully" << std::endl;
+        }
+        else {
+            std::cerr << "error : file '" << fileName << "' could not be removed, it may not exists" << std::endl;
+        }
+    }
+    catch (const std::filesystem::filesystem_error& e) {
+        std::cerr << "error while removing file '" << fileName << "': " << e.what() << std::endl;
+    }
+    
+}
+
+CatCommand::CatCommand(const std::string& fileName) : fileName(fileName)
+{
+
+}
+
+void CatCommand::execute(Shell& shell)
+{
+    std::ifstream file(fileName);
+    if (file) {
+        std::cout << "file cat-ed : " << std::endl;
+        std::string line;
+        while (std::getline(file, line)) {
+            std::cout << line << std::endl;
+        }
+    }
+    else {
+        std::cerr << "error : could not open file : " << fileName << std::endl;
+    }
+}
